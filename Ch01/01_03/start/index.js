@@ -1,15 +1,12 @@
 const https = require("https");
 const fs = require("fs");
+const { createServer } = require("http");
 
-const url = "https://en.wikipedia.org/wiki/Cher";
-
-const request = https.get(url, (res) => {
-  let download = fs.createWriteStream("cher.html");
-  console.log("Response started!");
-  res.pipe(download);
-  res.on("end", () => {
-    console.log("Response finished");
+createServer((req, res) => {
+  res.writeHead(200, {
+    "Content-Type": "text/plain",
   });
-});
+  res.end("Hello World");
+}).listen(3000);
 
-request.end();
+console.log("web server is listening on 3000");
