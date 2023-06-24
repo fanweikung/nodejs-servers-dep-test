@@ -21,7 +21,7 @@ app.post("/dictionary", bodyparser.json(), (req, res) => {
 });
 
 const save = () => {
-  fs.writeFile("./ski-term.json", JSON.stringify(skiTerms, null, 2), (err) => {
+  fs.writeFile("./ski-terms.json", JSON.stringify(skiTerms, null, 2), (err) => {
     if (err) {
       throw err;
     }
