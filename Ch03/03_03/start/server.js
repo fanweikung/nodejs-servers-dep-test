@@ -13,10 +13,19 @@ app.get("/dictionary", (req, res) => {
 app.post("/dictionary", bodyparser.json(), (req, res) => {
   console.log(req.body);
   skiTerms.push(req.body);
+  save();
   res.json({
     status: "success",
     term: req.body,
   });
 });
+
+const save = () => {
+  fs.writeFile("./ski-term.json", JSON.stringify(skiTerms, null, 2), (err) => {
+    if (err) {
+      throw err;
+    }
+  });
+};
 
 app.listen(3000, () => console.log("ski dictionary running at 3000"));
