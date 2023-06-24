@@ -15,22 +15,26 @@ app.post("/dictionary", bodyParser.json(), (req, res) => {
   save();
   res.json({
     status: "success",
-    term: req.body
+    term: req.body,
+  });
+});
+
+app.delete("/dictionary/:term", (req, res) => {
+  skiTerms = skiTerms.filter(({ term }) => term !== req.params.term);
+  save();
+  res.json({
+    status: "success",
+    removed: req.params.term,
+    newLength: skiTerms.length,
   });
 });
 
 const save = () => {
-  fs.writeFile(
-    "./ski-terms.json",
-    JSON.stringify(skiTerms, null, 2),
-    (err) => {
-      if (err) {
-        throw err;
-      }
+  fs.writeFile("./ski-terms.json", JSON.stringify(skiTerms, null, 2), (err) => {
+    if (err) {
+      throw err;
     }
-  );
+  });
 };
 
-app.listen(3000, () =>
-  console.log("ski dictionary running at 3000")
-);
+app.listen(3000, () => console.log("ski dictionary running at 3000"));
