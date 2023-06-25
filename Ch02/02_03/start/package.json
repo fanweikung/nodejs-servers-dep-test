@@ -15,6 +15,6 @@
   "author": "Eve Porcello",
   "license": "MIT",
   "dependencies": {
-    "minimist": "^1.2.6"
+    "minimist": "^1.2.8"
   }
 }
